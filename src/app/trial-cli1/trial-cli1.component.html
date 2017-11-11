@@ -1,0 +1,75 @@
+<p>
+  trial-cli1 works!
+</p>
+
+<!-- ** BEWARE ** If You perform this action i.e. using parent directive inside child's directive, It leads to infinite loop as parent executes child and child executes parent back again and so on !-->
+<!-- <app-root></app-root> -->
+
+
+<user-component></user-component>
+
+<!-- String Interpolation -->
+  <!-- {{ returnUserName() }} -->
+
+
+  <!-- Property Binding Example , is done inside square brackets []-->
+  <!-- Event Binding is done by name of the event used in JavaScript and removing 'on' from it
+   and use it inside Parenthesis () followed by the assignment of the event defined in TypeScript-->
+      <button type="button" class="btn btn-primary" [disabled]="!allowButtonDisabling" (click)="onButtonClick()">
+        Sample Button
+      </button>
+      <br>
+
+      <!-- Perperty Binding can be applied to any HTML attributes present for the specific Element -->
+        <!-- <p *ngIf="serverCreated" [innerText] = "serverStatus"></p> -->
+                      <!-- OR -->
+        <!-- <p>{{ serverStatus }}</p> -->
+      <!-- Both of the above reveals same result ! -->
+      <!-- Choice of any one type is user-specific,   BEWARE, Do not intermix them or an Error will be thrown :'( ! -->
+    <!-- Ends -->
+
+<!-- Take user input and pass it to Handler -->
+  <!-- <input type="text" (input)="onGettingInput($event)">
+  <p [innerText]="userValue"></p> -->
+
+<!-- Two Way Binding done by using property-binding followed by event-binding i.e. '[(ngModel)]' -->
+  <!-- <input type="text" [(ngModel)]="userValue"> -->
+
+<!-- '*ngIf' and 'else' Directive -->
+  <!-- NOTE: Angular does not hide elements for which *ngIf is false, It is just not present inside DOM, and when it is true it adds that element to DOM dynamically ! -->
+    <p *ngIf="serverCreated; else noServer" [innerText] = "serverStatus"></p>
+    <!-- NOTE: Whatever inside scope of 'ng-template' is thrown if *ngIf condition is not true based on the locator '#' given right next to '*ngIf' -->
+    <ng-template #noServer>
+      <p>No Server was Created !</p>
+    </ng-template>
+<!-- ENDS -->
+
+<!-- <br><br><hr><br><br> -->
+
+
+<!-- Using 'ngStyle' -->
+  <!-- <p [ngStyle]="{backgroundColor: 'Red'}">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor </p> -->
+        <!-- OR -->
+  <!-- <p [ngStyle]="{'background-color': 'Red'}">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor </p> -->
+        <!-- OR -->
+  <!-- <span [ngStyle]="{'background-color': getColor()}">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor </span> -->
+
+<br>
+
+<!-- Using 'ngClass' -->
+  <span [ngClass]="{'fantasy': allowButtonDisabling === true, 'noFantasy': allowButtonDisabling === false}" [ngStyle]="{'background-color': getColor()}">See How Amazing Angular-4 is ! </span>
+
+
+<!-- Using '*ngFor' directive -->
+    <!-- <p *ngFor="let server of serversArray">{{server}}</p> -->
+
+
+<!-- Assignment for Directives Starts -->
+  <button type="button" class="btn btn-primary" (click)="directiveAssign()">Button Log</button>
+  <br>
+  <p *ngFor="let butLog of buttonLog; let i = index"
+    [ngStyle]="{backgroundColor: i >= 5 ? 'blue':'transparent'}"
+    [ngClass]="{'directiveColor': i >= 5}">
+      {{butLog}}
+    </p>
+<!-- Ends -->
